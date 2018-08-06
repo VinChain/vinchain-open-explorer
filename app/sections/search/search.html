@@ -36,7 +36,7 @@
                 <div class="panel-heading">Search Account</div>
                 <div class="panel-body">
                     <p>Looking for an account? Start typing the first letters of it's name and let the autocompleate feature help you find the exact string.</p>
-                    <p>Sample input: <a data-ng-click="add2account('alfredo-worker')" style="cursor: pointer;">alfredo-worker</a></p>
+                    <p>Sample input: <a data-ng-click="add2account('vinchain.team')" style="cursor: pointer;">vinchain.team</a></p>
                     <form role="form" data-ng-submit="submit()">
                         <input type="hidden" class="form-control" ng-model="type" value="account">
                         <div class="form-group ui-typeahead">
@@ -70,27 +70,6 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Search Asset</h3>
-                </div>
-                <div class="panel-body">
-                    <p>Looking for a SmartCoin or UIA? Start typing the first letters of it's name and let the autocompleate feature help you find the exact string.</p>
-                    <p>Sample input: <a data-ng-click="add2asset('CNY')" style="cursor: pointer;">CNY</a></p>
-                    <form role="form" data-ng-submit="submit()">
-                        <input type="hidden" class="form-control" ng-model="type" value="asset">
-                        <div class="form-group ui-typeahead">
-                            <label for="asset">Asset name or id</label>
-                            <input type="text" class="form-control" ng-model="asset" ng-change="updateData('asset')" id="asset" placeholder="enter asset name or id"
-                                   uib-typeahead="a for a in assets | filter:$viewValue | limitTo:8" ng-required="required">
-                        </div>
-                        <button type="submit" class="btn btn-success btn-w-md">Go</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         <div class="col-md-4">
             <div class="panel panel-primary">
                 <div class="panel-heading">

@@ -447,7 +447,7 @@
                         //console.log(response.data);
                         var markets = [];
                         angular.forEach(response.data, function(value, key) {
-                            var parsed = {pair: value[1], price: value[3], volume: value[4]};
+                            var parsed = {pair: value['pair'], price: value['price'], volume: value['volume']};
                             markets.push(parsed);
                         });
                         $scope.markets = markets;

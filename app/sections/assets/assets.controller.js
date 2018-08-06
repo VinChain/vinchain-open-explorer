@@ -37,7 +37,7 @@
                             description = description_p[3];
                             type = "User Issued";
                         }
-                        if(response.data[0].symbol == "BTS")
+                        if(response.data[0].symbol == "VIN")
                             type = "Core Token";
 
                         var long_description = false;
@@ -216,7 +216,7 @@
                                 $scope.dex_volume_chart.options = {
                                     animation: true,
                                     title : {
-                                        text: 'Daily DEX Volume in BTS for the last 30 days'
+                                        text: 'Daily DEX Volume in VIN for the last 30 days'
                                     },
                                     tooltip : {
                                         trigger: 'axis'

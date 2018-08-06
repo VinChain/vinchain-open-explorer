@@ -85,11 +85,11 @@
                                     registrar: response.data[0][1].registrar_name,
                                     statistics: response.data[0][1].account.statistics,
                                     cashback: cashback_balance_id,
-                                    cashback_balance: utilities.formatBalance(cashback_balance_balance, 5),
+                                    cashback_balance: utilities.formatBalance(cashback_balance_balance, 6),
                                     lifetime: lifetime,
                                     total_ops: total_ops,
-                                    lifetime_fees_paid: parseInt(utilities.formatBalance(lifetime_fees_paid, 5)),
-                                    bts_balance: parseInt(utilities.formatBalance(bts_balance, 5)),
+                                    lifetime_fees_paid: parseInt(utilities.formatBalance(lifetime_fees_paid, 6)),
+                                    bts_balance: parseInt(utilities.formatBalance(bts_balance, 6)),
                                     vesting: vesting,
                                     memo_key: response.data[0][1].account.options.memo_key,
                                     voting_account_id: voting_account_id,
@@ -424,10 +424,10 @@
             if(path == "/accounts") {
 				$http.get(appConfig.urls.python_backend + "/accounts")
 					.then(function(response) {
-						//console.log(response.data);
+						console.log(response.data);
 						var richs = [];
 						for(var i = 0; i < response.data.length; i++) { // for de 100 y ya esta
-                            var amount = utilities.formatBalance(response.data[i].amount, 5);
+                            var amount = utilities.formatBalance(response.data[i].amount, 6);
 							var parsed = { name: response.data[i].name, id: response.data[i].account_id, amount: amount };
 							//console.log(parsed);
 							richs.push(parsed);

@@ -29,10 +29,10 @@
         var date = new Date();
         var year = date.getFullYear();
         var main = {
-            brand: 'Bitshares Explorer',
+            brand: 'Vinchain Explorer',
             name: 'oxarbitrage',
-            api_link: 'https://github.com/oxarbitrage/bitshares-python-api-backend',
-            source_code_link: 'https://github.com/oxarbitrage/open-explorer',
+            api_link: 'https://github.com/VinChain/vinchain-python-api-backend',
+            source_code_link: 'https://github.com/VinChain/vinchain-open-explorer',
             year: year,
             pageTransition: pageTransitionOpts[0]
         };
@@ -47,12 +47,13 @@
         };
 
         var urls = {
-            //websocket: "ws://88.99.145.10:9999",
-            websocket: "ws://209.188.21.157:8090/ws",
-            python_backend: "http://23.94.69.140:5000",
-            //elasticsearch_wrapper: "http://185.208.208.184:5000",
-            elasticsearch_wrapper: "http://95.216.32.252:5010", // clockwork
-            udf_wrapper: "http://23.94.69.140:5001"
+			//websocket: "ws://192.168.3.11:8090/ws",
+            websocket: "ws://18.205.32.20:8090/ws",
+            //python_backend: "http://192.168.3.11:5000",
+            python_backend: "http://18.205.32.20:5000",
+			//elasticsearch_wrapper: "http://192.168.3.11:5010", // clockwork
+            elasticsearch_wrapper: "http://18.205.32.20:5010", // clockwork
+            udf_wrapper: "http://127.0.0.1:5001"
         };
 
         return {

@@ -85,7 +85,6 @@
                     $scope.dynamic = { head_block_number: response.data.head_block_number, accounts_registered_this_interval: response.data.accounts_registered_this_interval,  bts_market_cap: response.data.bts_market_cap, quote_volume: response.data.quote_volume, witness_count: response.data.witness_count, commitee_count: response.data.commitee_count };
 
                     var last10 = [];
-
                     angular.forEach(response2.data, function(value, key) {
                         var parsed = {};
                         parsed.block_num = value[3];
@@ -105,9 +104,11 @@
                         var operation = value[11];
 
                         var operation_text = "";
-                        operation_text = utilities.opText(appConfig, $http, operation_type, operation, function(returnData) {
-                            parsed.operation_text = returnData;
-                        });
+                        if (operation) {
+                            operation_text = utilities.opText(appConfig, $http, operation_type, operation, function (returnData) {
+                                parsed.operation_text = returnData;
+                            });
+                        }
 
                         last10.push(parsed);
                         $scope.operations = last10;
@@ -208,71 +209,6 @@
                 };
             });
 
-        // proxies chart
-        $http.get(appConfig.urls.python_backend + "/top_proxies")
-            .then(function(response) {
-                //console.log(response.data);
-
-                $scope.proxies = {};
-                $scope.proxies.options = {
-
-                    animation: true,
-
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b} : {c} ({d}%)"
-                    },
-                    legend: {
-                        orient: 'vertical',
-                        x: 'left',
-                        data: [response.data[0][1], response.data[1][1], response.data[2][1], response.data[3][1], response.data[4][1], response.data[5][1], response.data[6][1]]
-                    },
-                    toolbox: {
-                        show: true,
-                        feature: {
-                            saveAsImage: {show: true, title: "save as image"}
-                        }
-                    },
-                    calculable: true,
-                    series: [
-                        {
-                            color: ['#81CA80','#6BBCD7', '#E9C842', '#E96562', '#008000', '#FB8817', '#552AFF'],
-                            name: 'Proxies',
-                            type: 'pie',
-                            radius: ['50%', '70%'],
-                            itemStyle: {
-                                normal: {
-                                    label: {
-                                        show: false
-                                    },
-                                    labelLine: {
-                                        show: false
-                                    }
-                                },
-                                emphasis: {
-                                    label: {
-                                        show: true,
-                                        position: 'center',
-                                        textStyle: {
-                                            fontSize: '30',
-                                            fontWeight: 'bold'
-                                        }
-                                    }
-                                }
-                            },
-                            data: [
-                                {value: response.data[0][2], name: response.data[0][1]},
-                                {value: response.data[1][2], name: response.data[1][1]},
-                                {value: response.data[2][2], name: response.data[2][1]},
-                                {value: response.data[3][2], name: response.data[3][1]},
-                                {value: response.data[4][2], name: response.data[4][1]},
-                                {value: response.data[5][2], name: response.data[5][1]},
-                                {value: response.data[6][2], name: response.data[6][1]}
-                            ]
-                        }
-                    ]
-                };
-            });
 
         // markets chart - top 5 markets by volume 24 hs
         $http.get(appConfig.urls.python_backend + "/top_markets")
@@ -280,6 +216,13 @@
                 //console.log(response.data);
 
                 $scope.markets = {};
+                var legend_data = [];
+                var series_data = [];
+                for (var i = 0; i < response.data.length; i++) {
+                    legend_data.push(response.data[i][0]);
+                    series_data.push({value: response.data[i][1], name: response.data[i][0]})
+                }
+
                 $scope.markets.options = {
 
                     animation: true,
@@ -291,7 +234,7 @@
                     legend: {
                         orient: 'vertical',
                         x: 'left',
-                        data: [response.data[0][0], response.data[1][0], response.data[2][0], response.data[3][0], response.data[4][0], response.data[5][0], response.data[6][0]]
+                        data: legend_data
                     },
                     toolbox: {
                         show: true,
@@ -326,159 +269,9 @@
                                     }
                                 }
                             },
-                            data: [
-                                {value: response.data[0][1], name: response.data[0][0]},
-                                {value: response.data[1][1], name: response.data[1][0]},
-                                {value: response.data[2][1], name: response.data[2][0]},
-                                {value: response.data[3][1], name: response.data[3][0]},
-                                {value: response.data[4][1], name: response.data[4][0]},
-                                {value: response.data[5][1], name: response.data[5][0]},
-                                {value: response.data[6][1], name: response.data[6][0]}
-                            ]
+                            data: series_data
                         }
                     ]
-                };
-            });
-
-        // smartcoins chart - top 5 smartcoins by volume 24 hs
-        $http.get(appConfig.urls.python_backend + "/top_smartcoins")
-            .then(function(response) {
-                $scope.smartcoins = {};
-                $scope.smartcoins.options = {
-                    //title : {
-                    //    text: 'Nightingale rose diagram',
-                    //    x:'center'
-                    //},
-                    animation: true,
-
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b} : {c} ({d}%)"
-                    },
-                    legend: {
-                        orient: 'vertical',
-                        x: 'left',
-                        data: [response.data[0][0], response.data[1][0], response.data[2][0], response.data[3][0], response.data[4][0], response.data[5][0], response.data[6][0]]
-                    },
-                    toolbox: {
-                        show: true,
-                        feature: {
-                            saveAsImage: {show: true, title: "save as image"}
-                        }
-                    },
-                    calculable: true,
-                    series: [
-                        {
-                            color: ['#81CA80','#6BBCD7', '#E9C842', '#E96562', '#008000', '#FB8817', '#552AFF'],
-                            name: 'Top Smartcoins',
-                            type: 'pie',
-                            //radius : [20, 110],
-                            //center : ['25%', 200],
-                            roseType: 'radius',
-                            //width: '40%',       // for funnel
-                            max: 40,            // for funnel
-                            itemStyle: {
-                                normal: {
-                                    label: {
-                                        show: false
-                                    },
-                                    labelLine: {
-                                        show: false
-                                    }
-                                },
-                                emphasis: {
-                                    label: {
-                                        show: true
-                                    },
-                                    labelLine: {
-                                        show: true
-                                    }
-                                }
-                            },
-                            data: [
-                                {value: response.data[0][1], name: response.data[0][0]},
-                                {value: response.data[1][1], name: response.data[1][0]},
-                                {value: response.data[2][1], name: response.data[2][0]},
-                                {value: response.data[3][1], name: response.data[3][0]},
-                                {value: response.data[4][1], name: response.data[4][0]},
-                                {value: response.data[5][1], name: response.data[5][0]},
-                                {value: response.data[6][1], name: response.data[6][0]}
-                            ]
-                        }
-
-                    ]
-
-                };
-            });
-
-        // uias chart - top 5 uias by volume 24 hs
-        $http.get(appConfig.urls.python_backend + "/top_uias")
-            .then(function(response) {
-                $scope.uias = {};
-                $scope.uias.options = {
-
-                    animation: true,
-                    //title : {
-                    //    text: 'Nightingale rose diagram',
-                    //    x:'center'
-                    //},
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b} : {c} ({d}%)"
-                    },
-                    legend: {
-                        orient: 'vertical',
-                        x: 'left',
-                        data: [response.data[0][0], response.data[1][0], response.data[2][0], response.data[3][0], response.data[4][0], response.data[5][0], response.data[6][0]]
-                    },
-                    toolbox: {
-                        show: true,
-                        feature: {
-                            saveAsImage: {show: true, title: "save as image"}
-                        }
-                    },
-                    calculable: true,
-                    series: [
-                        {
-                            color: ['#81CA80','#6BBCD7', '#E9C842', '#E96562', '#008000', '#FB8817', '#552AFF'],
-                            name: 'Top User Issued Assets',
-                            type: 'pie',
-                            //radius : [20, 110],
-                            //center : ['25%', 200],
-                            roseType: 'radius',
-                            //width: '40%',       // for funnel
-                            max: 40,            // for funnel
-                            itemStyle: {
-                                normal: {
-                                    label: {
-                                        show: false
-                                    },
-                                    labelLine: {
-                                        show: false
-                                    }
-                                },
-                                emphasis: {
-                                    label: {
-                                        show: true
-                                    },
-                                    labelLine: {
-                                        show: true
-                                    }
-                                }
-                            },
-                            data: [
-                                {value: response.data[0][1], name: response.data[0][0]},
-                                {value: response.data[1][1], name: response.data[1][0]},
-                                {value: response.data[2][1], name: response.data[2][0]},
-                                {value: response.data[3][1], name: response.data[3][0]},
-                                {value: response.data[4][1], name: response.data[4][0]},
-                                {value: response.data[5][1], name: response.data[5][0]},
-                                {value: response.data[6][1], name: response.data[6][0]}
-                            ]
-                        }
-
-                    ]
-
                 };
             });
 

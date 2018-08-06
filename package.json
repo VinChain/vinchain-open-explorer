@@ -1,8 +1,8 @@
 {
-  "name": "bitshares-explorer",
+  "name": "vinchain-open-explorer",
   "private": false,
   "version": "0.0.0",
-  "description": "An opensource bitshares explorer.",
+  "description": "An opensource vinchain explorer.",
   "repository": "https://github.com/oxarbitrage/bitshares-explorer",
   "license": "MIT",
   "devDependencies": {
@@ -54,7 +54,7 @@
     "postupdate-deps": "bower update",
 
     "prestart": "npm install",
-    "start": "http-server -a localhost -p 8000 -c-1 ./app",
+    "start": "http-server -a 0.0.0.0 -p 8000 -c-1 ./app",
 
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",

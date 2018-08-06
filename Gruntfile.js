@@ -58,7 +58,8 @@
             connect: {
                 options: {
                     port: 8000,
-                    hostname: "127.0.0.1"
+//                    hostname: "172.30.0.117"
+                    hostname: "192.168.3.11"
                 },
                 livereload: {
                     options: {
@@ -77,7 +78,8 @@
             },
             open: {
                 server: {
-                    url: "http://localhost:<%= connect.options.port %>"
+//                    url: "http://172.30.0.117:<%= connect.options.port %>"
+                    url: "http://192.168.3.11:<%= connect.options.port %>"
                 }
             },
             clean: {
@@ -104,7 +106,7 @@
                 options: {
                     jshintrc: ".jshintrc"
                 },
-                all: ["Gruntfile.js", "<%= yeoman.app %>/scripts/**/*.js"]
+                all: ["Gruntfile.js", "<%= ye:oman.app %>/scripts/**/*.js"]
             },
             injector: {
                 options: {
