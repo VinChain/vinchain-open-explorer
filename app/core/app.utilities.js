@@ -493,6 +493,27 @@
                     name = "FBA DISTRIBUTE";
                     color = "8808B2";
                 }
+                else if(opType == 47) {
+                    name = "VINDB BLOCK CREATE";
+                    color = "007f7f";
+                }
+                else if(opType == 48) {
+                    name = "INVOICE CREATE";
+                    color = "00407f";
+                }
+                else if(opType == 49) {
+                    name = "INVOICE PAYMENT";
+                    color = "7f0072";
+                }
+                else if(opType == 50) {
+                    name = " GIVE EXCLUSIVE PERMISSION";
+                    color = "497f00";
+                }
+                else {
+                    name = "";
+                    color = "505050";
+                }
+
 
                 results[0] = name;
                 results[1] = color;

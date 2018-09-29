@@ -251,23 +251,6 @@
                         $scope.votes = votes;
 
 
-                        // get if is worker
-                        $scope.is_worker = 0;
-                        $http.get(appConfig.urls.python_backend + "/get_workers")
-                            .then(function (response_w) {
-                                for (var i = 0; i < response_w.data.length; i++) {
-
-                                    //console.log(response.data[0][1].account.id);
-                                    //console.log(response_w.data[i][0].worker_account);
-                                    var worker_account = response_w.data[i][0].worker_account;
-                                    if (worker_account == response.data[0][1].account.id) {
-                                        $scope.is_worker = 1;
-                                        break;
-                                    }
-
-                                }
-                            });
-
                         // get if is witness
                         $scope.is_witness = 0;
                         $http.get(appConfig.urls.python_backend + "/get_witnesses")
@@ -296,23 +279,6 @@
                                     var committee_member_account = response_w.data[i][0].committee_member_account;
                                     if (committee_member_account == response.data[0][1].account.id) {
                                         $scope.is_committee_member = 1;
-                                        break;
-                                    }
-
-                                }
-                            });
-
-                        // get if is top proxy
-                        $scope.is_proxy = 0;
-                        $http.get(appConfig.urls.python_backend + "/top_proxies")
-                            .then(function (response_w) {
-                                for (var i = 0; i < response_w.data.length; i++) {
-
-                                    //console.log(response.data[0][1].account.id);
-                                    //console.log(response_w.data[i][0].worker_account);
-                                    var proxy_account = response_w.data[i][0];
-                                    if (proxy_account == response.data[0][1].account.id) {
-                                        $scope.is_proxy = 1;
                                         break;
                                     }
 
@@ -424,7 +390,7 @@
             if(path == "/accounts") {
 				$http.get(appConfig.urls.python_backend + "/accounts")
 					.then(function(response) {
-						console.log(response.data);
+						// console.log(response.data);
 						var richs = [];
 						for(var i = 0; i < response.data.length; i++) { // for de 100 y ya esta
                             var amount = utilities.formatBalance(response.data[i].amount, 6);
