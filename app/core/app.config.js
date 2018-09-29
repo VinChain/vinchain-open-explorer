@@ -46,13 +46,11 @@
             gray:       '#DCDCDC'
         };
 
+        var server_ip = "192.168.3.11"
         var urls = {
-			//websocket: "ws://192.168.3.11:8090/ws",
-            websocket: "ws://18.205.32.20:8090/ws",
-            //python_backend: "http://192.168.3.11:5000",
-            python_backend: "http://18.205.32.20:5000",
-			//elasticsearch_wrapper: "http://192.168.3.11:5010", // clockwork
-            elasticsearch_wrapper: "http://18.205.32.20:5010", // clockwork
+			websocket: "ws://" + server_ip + ":8090/ws",
+            python_backend: "http://" +  server_ip +":5000",
+			elasticsearch_wrapper: "http://" + server_ip + ":5010", // clockwork
             udf_wrapper: "http://127.0.0.1:5001"
         };
 
